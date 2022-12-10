@@ -71,15 +71,15 @@ function clearItem() {
 }
 //edit btn function
 function editItem(e) {
- const element = e.currentTarget.parentContainer;
- editElement = e.currentTarget.parentElement.previousElementSibling;
-  // set form value
-  grocery.value = editElement.innerHTML;   
+    
 }
 // delete btn function
 function deleteItem(e) {
     const element = e.currentTarget.parentContainer;
     list.remove(element);
+    if (list.element.length === 0) {
+        container.classList.remove("show-grocery");
+    }
     displayAlert("item deleted", "danger");
     setbackToDefault();
 }
