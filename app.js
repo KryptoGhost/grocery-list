@@ -21,18 +21,20 @@ function addItem(e) {
     const value = grocery.value;
     
     if (value && !editflag) {
-        list.innerHTML = `<p class="groceryItem">${value}</p>
+        const element = document.createElement("article");
+        element.innerHTML = `<p class="groceryItem">${value}</p>
         <div class="btn-container">
           <button class="btn-edit"><i class="fas fa-edit"></i></button>
           <button class="btn-delete"><i class="fas fa-trash"></i></button>
         </div>`;
         //edit btn here
-        const editBtn = document.querySelector(".btn-edit");
+        //const editBtn = document.querySelector(".btn-edit");
         //editBtn.addEventListener("click", editItem);
         //delete btn here
-        const deletebtn = document.querySelector(".btn-delete");
+        const deletebtn = element.querySelector(".btn-delete");
         deletebtn.addEventListener("click", deleteItem);
         
+        list.appendChild(element);
         container.classList.add("show-grocery");
         displayAlert("Item was added", "success");
         setbackToDefault();
@@ -64,10 +66,12 @@ function clearItem() {
     const groceryItem = document.querySelectorAll("grocery-item");
     if (groceryItem.length > 0) {
         grocery.forEach(item => {
-            list.remove(item)
+            list.removeChild(item)
         })
     }
     container.classList.remove("show-grocery");
+    displayAlert("empty list", "danger");
+    setbackToDefault();
 }
 //edit btn function
 function editItem(e) {
@@ -75,11 +79,6 @@ function editItem(e) {
 }
 // delete btn function
 function deleteItem(e) {
-    const element = e.currentTarget.parentContainer;
-    list.remove(element);
-    if (list.element.length === 0) {
-        container.classList.remove("show-grocery");
-    }
-    displayAlert("item deleted", "danger");
-    setbackToDefault();
+    const element  = e.currentTarget.parentContainer;
+    list.removeChild(element);
 }
