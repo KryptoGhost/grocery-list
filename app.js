@@ -22,14 +22,16 @@ function addItem(e) {
     
     if (value && !editflag) {
         const element = document.createElement("article");
+        element.classList.add("grocery-item");
         element.innerHTML = `<p class="groceryItem">${value}</p>
         <div class="btn-container">
           <button class="btn-edit"><i class="fas fa-edit"></i></button>
           <button class="btn-delete"><i class="fas fa-trash"></i></button>
         </div>`;
+
         //edit btn here
-        //const editBtn = document.querySelector(".btn-edit");
-        //editBtn.addEventListener("click", editItem);
+        const editBtn = element.querySelector(".btn-edit");
+        editBtn.addEventListener("click", editItem);
         //delete btn here
         const deletebtn = element.querySelector(".btn-delete");
         deletebtn.addEventListener("click", deleteItem);
@@ -40,7 +42,9 @@ function addItem(e) {
         setbackToDefault();
     }
     else if (value && editflag) {
-
+        editElement.innerHTML = value;
+        displayAlert("value added", "success");
+        setbackToDefault();
     }
     else {
         displayAlert("please add an item", "danger");
@@ -63,9 +67,9 @@ function setbackToDefault() {
 }
 // clear btn function
 function clearItem() {
-    const groceryItem = document.querySelectorAll("grocery-item");
+    const groceryItem = document.querySelectorAll(".grocery-item");
     if (groceryItem.length > 0) {
-        grocery.forEach(item => {
+        groceryItem.forEach(item => {
             list.removeChild(item)
         })
     }
@@ -75,10 +79,23 @@ function clearItem() {
 }
 //edit btn function
 function editItem(e) {
-    
+    const element = e.currentTarget.parentElement.parentElement;
+    //target the paragragh to be edited
+    //editElement = document.querySelector(".groceryItem");
+     editElement = e.currentTarget.parentElement.previousElementSibling;
+    grocery.value = editElement.innerHTML;
+    editflag = true;
+    submitBtn.textContent = "edit";
+    editID = element.dataset.id;
 }
 // delete btn function
 function deleteItem(e) {
-    const element  = e.currentTarget.parentContainer;
-    list.removeChild(element);
+const element = e.currentTarget.parentElement.parentElement;
+list.removeChild(element);
+
+if (list.children.length === 0) {
+    container.classList.remove("show-grocery");
+}
+displayAlert("item removed", "danger");
+setbackToDefault();
 }

@@ -56,7 +56,7 @@ input {
     place-items: center;
 }
 
-article {
+article, .grocery-item {
     width: 90%;
     padding: 20px 30px;
     display: flex;
