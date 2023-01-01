@@ -29,6 +29,7 @@ input {
     padding: 4px;
     margin: 0;
     width: 60%;
+    height: 40px;
     border: transparent;
     background-color: azure;
 }
@@ -36,27 +37,31 @@ input {
 .submit-btn {
     padding: 4px;
     background-color: aquamarine;
-    border: 1px solid black;
+    border: transparent;
+    height: 40px;
+    width: 55px;
+    border-radius: 5px;
 }
 
 .grocery-container {
     box-sizing: border-box;
     text-align: center;
-    visibility: hidden;
 }
 
-.show-grocery {
+/*.show-grocery {
     visibility: visible;
-}
+}*/
 
 .grocery-list {
     width: 90%;
-    padding: 2px 10px;
-    display: grid;
-    place-items: center;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
 }
 
-article, .grocery-item {
+.grocery-item {
     width: 90%;
     padding: 20px 30px;
     display: flex;
@@ -64,24 +69,34 @@ article, .grocery-item {
 }
 
 .btn-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+.groceryWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .btn-edit {
     color: blue;
     border: transparent;
+    padding: 3px;
 }
 
 .btn-delete {
     color: red;
     border: transparent;
+    padding: 3px;
 }
 
 .clear-btn {
     padding: 3px;
     color: red;
+    align-self: center;
+    display: none;
 }
 
 .alert {
